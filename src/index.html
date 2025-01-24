@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App - am leaening this</title>
+  <title>Fruit and Veg Nutrition</title>
 </head>
-
 <body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
-    <p>This is a simple app that uses vanilla JavaScript to fetch data from an API and display it on the page. janes test page</p>
-    <p>The following example shows
-  </main>
-</body>
+  <h1>Fruit and Vegetable Nutrition Tracker</h1>
+  <form id="nutritionForm">
+    <label for="foodInput">Enter a fruit or vegetable:</label>
+    <input type="text" id="foodInput" placeholder="e.g., apple, broccoli" required>
+    <button type="submit">Get Nutrition Info</button>
+  </form>
+  <div id="results"></div>
 
+  <script src="script.js"></script>
+</body>
 </html>
