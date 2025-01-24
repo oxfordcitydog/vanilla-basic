@@ -80,4 +80,43 @@ document.getElementById("nutritionForm").addEventListener("submit", async functi
       resultsDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
     }
   });
-  
+  // new code for nutrition slots
+  const fetchBtn = document.getElementById('fetchBtn');
+const foodInput = document.getElementById('foodInput');
+const resultDiv = document.getElementById('result');
+
+// Replace with your Nutritionix API credentials
+const appId = 'YOUR_APP_ID'; // Your App ID from Nutritionix
+const apiKey = 'YOUR_API_KEY'; // Your API Key from Nutritionix
+
+fetchBtn.addEventListener('click', () => {
+  const food = foodInput.value;
+  if (!food) {
+    resultDiv.innerHTML = '<p>Please enter a food name.</p>';
+    return;
+  }
+
+  fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-app-id': appId,
+      'x-app-key': apiKey,
+    },
+    body: JSON.stringify({ query: food }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      const nutrients = data.foods[0].full_nutrients;
+      let output = `<h2>Nutrition Info for ${food}</h2><ul>`;
+      nutrients.forEach(nutrient => {
+        output += `<li>${nutrient.attr_id}: ${nutrient.value}</li>`;
+      });
+      output += '</ul>';
+      resultDiv.innerHTML = output;
+    })
+    .catch(err => {
+      console.error('Error:', err);
+      resultDiv.innerHTML = '<p>Sorry, something went wrong. Please try again.</p>';
+    });
+});
